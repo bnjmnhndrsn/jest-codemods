@@ -19,16 +19,18 @@ const cli = meow(
     Options
       --force, -f   Bypass Git safety checks and forcibly run codemods
       --dry, -d     Dry run (no changes are made to files)
+      --print, -p   Print output, useful for development
       --parser      The parser to use for parsing your source files (babel | babylon | flow)  [babel]
     `,
     },
     {
-        boolean: ['force', 'dry'],
+        boolean: ['force', 'dry', 'print'],
         string: ['_'],
         alias: {
             f: 'force',
             h: 'help',
             d: 'dry',
+            p: 'print'
         },
     }
 );

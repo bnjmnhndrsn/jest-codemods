@@ -1,6 +1,6 @@
 import detectQuoteStyle from '../utils/quote-style';
 import logger from '../utils/logger';
-import { removeRequireAndImport } from '../utils/imports';
+import { isGloballyUsed } from '../utils/imports';
 
 const getAssertionExpression = identifier => ({
     type: 'CallExpression',
@@ -178,9 +178,10 @@ export default function transformer(fileInfo, api) {
     const j = api.jscodeshift;
     const ast = j(fileInfo.source);
 
-    const testFunctionName = removeRequireAndImport(j, ast, 'chai', 'assert');
+    const testFunctionName = isGloballyUsed(j, ast, 'assert');
 
     if (!testFunctionName) {
+        console.log('NO CHAI FOR YOU');
         // No Chai require/import were found
         return fileInfo.source;
     }

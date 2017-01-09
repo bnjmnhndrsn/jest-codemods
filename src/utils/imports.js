@@ -82,3 +82,23 @@ export function removeRequireAndImport(j, ast, pkg, specifier) {
 
     return localName;
 }
+
+export function isGloballyUsed(j, ast, functionName){
+    const isUsedDirectly = !!ast.find(j.CallExpression, {
+      callee: {
+        type: 'Identifier',
+        name: functionName
+      }
+    }).size();
+
+    const isUsedAsModule = !!ast.find(j.CallExpression, {
+      callee: {
+        type: 'MemberExpression',
+        object: {
+            name: functionName
+        }
+      }
+    }).size();
+
+    return isUsedAsModule || isUsedDirectly;
+}

@@ -16,15 +16,17 @@ const cli = meow(
       --force, -f   Bypass Git safety checks and forcibly run codemods
       --dry, -d     Dry run (no changes are made to files)
       --parser      The parser to use for parsing your source files (babel | babylon | flow)  [babel]
+      --print, -p   Print output, useful for development
     `,
     },
     {
-        boolean: ['force', 'dry'],
+        boolean: ['force', 'dry', 'print'],
         string: ['_'],
         alias: {
             f: 'force',
             h: 'help',
             d: 'dry',
+            p: 'print'
         },
     }
 );
@@ -34,6 +36,6 @@ updateNotifier({ pkg: cli.pkg }).notify({ defer: false });
 const TRANSFORMER_CHAI_ASSERT = 'chai-assert';
 const TRANSFORMER_MOCHA = 'mocha';
 const ARROW_FUNCTIONS = 'arrow-functions'
-const allTransformers = [TRANSFORMER_CHAI_ASSERT, TRANSFORMER_MOCHA, ARROW_FUNCTIONS];
+const allTransformers = [TRANSFORMER_CHAI_ASSERT];
 
 executeTransformations(cli.input, cli.flags, allTransformers);

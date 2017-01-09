@@ -3,13 +3,13 @@ import { shallow } from 'enzyme';
 import LayoutPriceRanges from 'app/apps/buildings/components/LayoutPriceRanges';
 import ConstantsTestAPI from 'test/utils/constants-test-api';
 
-describe('Buildings', () => {
-    describe('LayoutPriceRanges', () => {
-        beforeAll(function() {
+describe('Buildings', function() {
+    describe('LayoutPriceRanges', function() {
+        before(function() {
             this.constantsAPI = new ConstantsTestAPI;
         });
 
-        afterAll(function() {
+        after(function() {
             this.constantsAPI.destroy();
         });
 
@@ -19,7 +19,7 @@ describe('Buildings', () => {
             {layout: 30, min_price: 1500, max_price: 2500},
         ];
 
-        it('renders props.layoutPriceRanges', () => {
+        it('renders props.layoutPriceRanges', function() {
             const wrapper = shallow(<LayoutPriceRanges layoutPriceRanges={layoutPriceRanges} />);
 
             expect(wrapper.find('.layout-price-range').length).to.equal(layoutPriceRanges.length);
@@ -27,7 +27,7 @@ describe('Buildings', () => {
             expect(wrapper.find('.layout-price-range').length).to.equal(0);
         });
 
-        it('renders props.title if given', () => {
+        it('renders props.title if given', function() {
             const title = 'THIS IS A CUSTOM TITLE';
             const wrapper = shallow(<LayoutPriceRanges layoutPriceRanges={layoutPriceRanges} />);
 
