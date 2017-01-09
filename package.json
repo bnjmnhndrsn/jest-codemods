@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "babel src -d dist --ignore *.test.js",
+    "build": "babel src -d dist --ignore *.test.js,sample.js",
     "check": "npm run lint && npm run test:cov",
     "clean": "rm -rf lib coverage npm-debug.log dist",
     "lint": "eslint --fix src",

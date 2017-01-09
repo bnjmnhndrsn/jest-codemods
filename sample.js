@@ -1,0 +1,39 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import LayoutPriceRanges from 'app/apps/buildings/components/LayoutPriceRanges';
+import ConstantsTestAPI from 'test/utils/constants-test-api';
+
+describe('Buildings', () => {
+    describe('LayoutPriceRanges', () => {
+        beforeAll(function() {
+            this.constantsAPI = new ConstantsTestAPI;
+        });
+
+        afterAll(function() {
+            this.constantsAPI.destroy();
+        });
+
+        const layoutPriceRanges = [
+            {layout: 20, min_price: 1000, max_price: 2000},
+            {layout: 10, min_price: 1500, max_price: 2500},
+            {layout: 30, min_price: 1500, max_price: 2500},
+        ];
+
+        it('renders props.layoutPriceRanges', () => {
+            const wrapper = shallow(<LayoutPriceRanges layoutPriceRanges={layoutPriceRanges} />);
+
+            expect(wrapper.find('.layout-price-range').length).to.equal(layoutPriceRanges.length);
+            wrapper.setProps({layoutPriceRanges: []});
+            expect(wrapper.find('.layout-price-range').length).to.equal(0);
+        });
+
+        it('renders props.title if given', () => {
+            const title = 'THIS IS A CUSTOM TITLE';
+            const wrapper = shallow(<LayoutPriceRanges layoutPriceRanges={layoutPriceRanges} />);
+
+            expect(wrapper.text()).to.not.contain(title);
+            wrapper.setProps({ title });
+            expect(wrapper.text()).to.contain(title);
+        });
+    });
+});
