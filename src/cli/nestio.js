@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { executeTransformations } from './transformers';
+import { executeDumbTransformations } from './dumb-transformers';
+
 import meow from 'meow';
 import updateNotifier from 'update-notifier';
 
@@ -36,6 +38,7 @@ updateNotifier({ pkg: cli.pkg }).notify({ defer: false });
 const TRANSFORMER_CHAI_ASSERT = 'chai-assert';
 const TRANSFORMER_MOCHA = 'mocha';
 const ARROW_FUNCTIONS = 'arrow-functions'
-const allTransformers = [TRANSFORMER_CHAI_ASSERT];
+const allTransformers = [TRANSFORMER_CHAI_ASSERT, TRANSFORMER_MOCHA, ARROW_FUNCTIONS];
 
-executeTransformations(cli.input, cli.flags, allTransformers);
+// executeTransformations(cli.input, cli.flags, allTransformers);
+executeDumbTransformations(cli.input, cli.flags);
