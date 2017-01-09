@@ -3,11 +3,11 @@ import { replacer } from '../dumb-transformers';
 
 function executeDumbTransformation(files, flags) {
     for (const file of files) {
+        console.log('Executing dumb transformation with ' + file);
         let contents = fs.readFileSync(file).toString();
-        console.log(contents);
         contents = replacer(contents);
         if (!flags.dry) {
-            fs.writeFileSync(contents);
+            fs.writeFileSync(file, contents);
         }
 
         if (flags.print) {

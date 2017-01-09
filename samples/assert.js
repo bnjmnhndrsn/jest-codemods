@@ -11,12 +11,12 @@ var BaseRegionsFixt = require('test/fixtures/base-regions.html');
 var EnterSubmitFixt = require('test/fixtures/enter-submit-input.html');
 
 
-describe('Behaviors', function(){
-    describe('EnterSubmitInput', function(){
+describe('Behaviors', () => {
+    describe('EnterSubmitInput', () => {
         var keydownCallback = sinon.spy();
         var keyupCallback = sinon.spy();
 
-        before(function(){
+        beforeAll(function(){
             fixtures.append(BaseRegionsFixt);
 
             this.region = new Marionette.Region({
@@ -41,7 +41,7 @@ describe('Behaviors', function(){
             });
         });
 
-        beforeEach(function(){
+        beforeEach(() => {
             this.view = new this.View;
             this.region.show(this.view);
 
@@ -49,51 +49,51 @@ describe('Behaviors', function(){
             this.keyupEvent = jQuery.Event('keyup', {keyCode: 13});
         });
 
-        afterEach(function(){
+        afterEach(() => {
             this.region.empty();
             keydownCallback.reset();
             keyupCallback.reset();
         });
 
-        after(function(){
+        afterAll(function(){
             fixtures.cleanup();
         });
 
-        describe('Key Down', function(){
-            it('adds active class to submit button on keydown event if keyCode is enter (13)', function(){
-                assert.notOk(this.view.ui.submitButton.hasClass('active'));
+        describe('Key Down', () => {
+            it('adds active class to submit button on keydown event if keyCode is enter (13)', () => {
+                expect(this.view.ui.submitButton.hasClass('active')).toBeFalsy();
                 this.view.ui.inputField.trigger(this.keydownEvent);
-                assert(this.view.ui.submitButton.hasClass('active'));
+                expect(this.view.ui.submitButton.hasClass('active')).toBeTruthy();
             });
 
-            it('calls keydownCallback if keydown event keyCode is enter (13)', function(){
+            it('calls keydownCallback if keydown event keyCode is enter (13)', () => {
                 this.view.ui.inputField.trigger(this.keydownEvent);
-                assert(keydownCallback.calledOnce);
+                expect(keydownCallback.calledOnce).toBeTruthy();
             });
 
-            it('does not fire callback or change submit button class if keyCode is not enter (13)', function(){
+            it('does not fire callback or change submit button class if keyCode is not enter (13)', () => {
                 this.view.ui.inputField.trigger(jQuery.Event('keydown', {keyCode: 69}));
-                assert.notOk(keydownCallback.called);
+                expect(keydownCallback.called).toBeFalsy();
             });
         });
 
-        describe('Key Up', function(){
-            it('removes active class to submit button on keyup event if keyCode is enter (13)', function(){
-                it('adds active class to submit button on keydown event if keyCode is enter (13)', function(){
+        describe('Key Up', () => {
+            it('removes active class to submit button on keyup event if keyCode is enter (13)', () => {
+                it('adds active class to submit button on keydown event if keyCode is enter (13)', () => {
                     this.view.ui.submitButton.addClass('active');
                     this.view.ui.inputField.trigger(keyupEvent);
-                    assert.notOk(this.view.ui.submitButton.hasClass('active'));
+                    expect(this.view.ui.submitButton.hasClass('active')).toBeFalsy();
                 });
             });
 
-            it('calls keyupCallback if keyup event keyCode is enter (13)', function(){
+            it('calls keyupCallback if keyup event keyCode is enter (13)', () => {
                 this.view.ui.inputField.trigger(this.keyupEvent);
-                assert(keyupCallback.calledOnce);
+                expect(keyupCallback.calledOnce).toBeTruthy();
             });
 
-            it('does not fire callback or change submit button class if keyCode is not enter (13)', function(){
+            it('does not fire callback or change submit button class if keyCode is not enter (13)', () => {
                 this.view.ui.inputField.trigger(jQuery.Event('keyup', {keyCode: 69}));
-                assert.notOk(keyupCallback.called);
+                expect(keyupCallback.called).toBeFalsy();
             });
         });
     });

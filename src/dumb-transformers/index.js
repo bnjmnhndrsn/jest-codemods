@@ -4,6 +4,7 @@ const REPLACEMENTS = [
     ['to\.be\.false', 'toBe(false)'],
     ['to\.deep\.equal', 'toEqual'],
     ['to\.equal', 'toEqual'],
+    ['to\.not\.equal', 'not.toEqual'],
     ['to\.be\.ok', 'toBeTruthy'],
     ['to\.be\.not\.ok', 'toBeFalsy'],
     ["to\.be\.a\('array'\)", 'toEqual(expect.any(Array))'],

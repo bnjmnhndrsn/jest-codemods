@@ -22,9 +22,9 @@ describe('Buildings', function() {
         it('renders props.layoutPriceRanges', function() {
             const wrapper = shallow(<LayoutPriceRanges layoutPriceRanges={layoutPriceRanges} />);
 
-            expect(wrapper.find('.layout-price-range').length).to.equal(layoutPriceRanges.length);
+            expect(wrapper.find('.layout-price-range').length).toEqual(layoutPriceRanges.length);
             wrapper.setProps({layoutPriceRanges: []});
-            expect(wrapper.find('.layout-price-range').length).to.equal(0);
+            expect(wrapper.find('.layout-price-range').length).toEqual(0);
         });
 
         it('renders props.title if given', function() {

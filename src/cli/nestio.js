@@ -38,7 +38,7 @@ updateNotifier({ pkg: cli.pkg }).notify({ defer: false });
 const TRANSFORMER_CHAI_ASSERT = 'chai-assert';
 const TRANSFORMER_MOCHA = 'mocha';
 const ARROW_FUNCTIONS = 'arrow-functions'
-const allTransformers = [TRANSFORMER_CHAI_ASSERT, TRANSFORMER_MOCHA, ARROW_FUNCTIONS];
+const allTransformers = [ARROW_FUNCTIONS, TRANSFORMER_CHAI_ASSERT, TRANSFORMER_MOCHA];
 
-// executeTransformations(cli.input, cli.flags, allTransformers);
+executeTransformations(cli.input, cli.flags, allTransformers);
 executeDumbTransformations(cli.input, cli.flags);
