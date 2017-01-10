@@ -27,3 +27,41 @@ export function replacer(contents) {
     }
     return contents;
 }
+
+const importSinonRegex = /import sinon/;
+const requireSinonRegex = /require\(.sinon.\)/;
+const importRegex = /^import/;
+const requireRegex = /require\(.[\w\-]+.\)/;
+const commentRegex = /\/\//;
+
+export function sinon(contents) {
+    if (contents.match(importSinonRegex) || contents.match(requireSinonRegex)) {
+        return contents;
+    }
+    
+    if (!contents.match(/sinon/)) {
+        return;
+    }
+    
+    let insertedLine;
+    if (contents.match(importRegex)) {
+        insertedLine = "import sinon from 'sinon';";
+    } else if (contents.match(requireRegex)) {
+        insertedLine = "var sinon = require('sinon');";
+    }
+        
+    const lines = contents.split('\n');
+    let insertBefore = 0;
+    while (true) {
+        const isComment = !!lines[insertBefore].match(/\/\//);
+        if (isComment) {
+            insertBefore++;
+        } else {
+            break;
+        }
+    }
+    
+    lines.splice(insertBefore, 0, insertedLine);
+    
+    return lines.join('\n');
+}

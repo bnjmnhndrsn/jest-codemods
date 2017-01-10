@@ -32,7 +32,6 @@ function executeTransformation(files, flags, transformer) {
 }
 
 export function executeTransformations(files, flags, transformers) {
-    console.log(files);
     transformers.forEach(t => {
         executeTransformation(files, flags, t);
     });

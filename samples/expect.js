@@ -8,7 +8,7 @@ describe('Buildings', function() {
         before(function() {
             this.constantsAPI = new ConstantsTestAPI;
         });
-
+        
         after(function() {
             this.constantsAPI.destroy();
         });

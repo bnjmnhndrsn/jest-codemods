@@ -18,7 +18,6 @@ describe('Behaviors', () => {
 
         beforeAll(function(){
             fixtures.append(BaseRegionsFixt);
-
             this.region = new Marionette.Region({
                 el: '#main-region'
             });
