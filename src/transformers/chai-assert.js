@@ -181,7 +181,6 @@ export default function transformer(fileInfo, api) {
     const testFunctionName = isGloballyUsed(j, ast, 'assert');
 
     if (!testFunctionName) {
-        console.log('NO CHAI FOR YOU');
         // No Chai require/import were found
         return fileInfo.source;
     }
