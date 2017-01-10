@@ -40,7 +40,7 @@ export function sinon(contents) {
     }
     
     if (!contents.match(/sinon/)) {
-        return;
+        return contents;
     }
     
     let insertedLine;
