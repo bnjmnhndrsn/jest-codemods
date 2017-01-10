@@ -1,4 +1,14 @@
-# jest-codemods
+A modified version of jest-codemods to support our specific usecase in converting tests at Nestio.
+
+Changes:
+  - Create new bin/nestio-codemodes.js script with custom specific functionality
+  - Add in arrow-functions.js codemod for changing regular functions to arrow functions if they're passed to a Jest method
+  - Change chai.assert codemod to run if `assert(foo)` or `assert.bar(foo)` is used anywhere in the file because we're not importing chai
+  - Create "Dumb Transformations" which apply simple scripts to files instead of full on js-codeshifts because we didn't have the time
+    - replacer: replaces Chai expect syntax with Jest syntax using regexes
+    - sinon: adds a sinon import to the top of files which use sinon
+
+# Original README
 
 Codemods that simplify migrating JavaScript test files from
 [Mocha](https://github.com/mochajs/mocha),
